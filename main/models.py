@@ -26,3 +26,6 @@ class Izoh(models.Model):
     reyting = models.PositiveSmallIntegerField()
     mahsulot = models.ForeignKey(Mahsulot, on_delete=models.CASCADE)
     sana = models.DateTimeField(auto_now_add=True)
+
+
+
