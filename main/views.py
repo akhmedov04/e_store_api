@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import *
 from .serializers import *
+from userapp.models import *
 
 class BolimAPI(APIView):
     def get(self, request):
@@ -26,3 +27,21 @@ class IzohlarAPI(APIView):
         izohlar = Izoh.objects.filter(mahsulot_id=pk)
         serializer = IzohSerializer(izohlar, many=True)
         return Response(serializer.data)
+
+    def post(self, request, pk):
+        serializer = IzohSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(mahsulot=Mahsulot.objects.get(id=pk), profil=Profil.objects.get(user=request.user))
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class MahsulotAPI(APIView):
+    def get(self, request, pk):
+        mahsulot = Mahsulot.objects.get(id=pk)
+        serializer = MahsulotSerializer(mahsulot)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class IzohDeleteAPI(APIView):
+    def delete(self, request, pk):
+        Izoh.objects.get(id=pk).delete()
+        return Response({"success":"True"}, status=status.HTTP_200_OK)
