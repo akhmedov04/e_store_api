@@ -1,5 +1,6 @@
 from django.db import models
-from userapp.models import *
+from userapp.models import Profil
+
 
 class Bolim(models.Model):
     nom = models.CharField(max_length=30)

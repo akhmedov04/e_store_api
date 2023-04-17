@@ -41,6 +41,19 @@ class MahsulotAPI(APIView):
         serializer = MahsulotSerializer(mahsulot)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+class MahsulotSearchView(APIView):
+    def get(self, request):
+        query = request.query_params.get('qidirish')
+        if query:
+            mahsulot = Mahsulot.objects.filter(nom__icontains=query)
+        else:
+            mahsulot = Mahsulot.objects.all()
+        serializer = MahsulotSearchSerializer(mahsulot, many=True)
+        return Response(serializer.data)
+
+
+
 class IzohDeleteAPI(APIView):
     def delete(self, request, pk):
         Izoh.objects.get(id=pk).delete()

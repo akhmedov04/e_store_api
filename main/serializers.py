@@ -21,6 +21,12 @@ class MahsulotSerializer(serializers.ModelSerializer):
         malumot['ortacha_reyting'] = round(izohlar.aggregate(Avg('reyting'))['reyting__avg'], 1)
         return malumot
 
+    def validate_chegirma(self, chegirma):
+        if 1 <= chegirma <= 50:
+            return chegirma
+        raise serializers.ValidationError("Chegirma 0 va 50 foiz orali'gida bo'lishi kerak")
+
+
 class IzohSerializer(serializers.ModelSerializer):
     class Meta:
         model = Izoh
@@ -30,3 +36,8 @@ class IzohSerializer(serializers.ModelSerializer):
         if 1 <= reyting <= 5:
             return reyting
         raise serializers.ValidationError("Noto'g'ri reyting bal kiritildi")
+
+class MahsulotSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mahsulot
+        fields = '__all__'

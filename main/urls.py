@@ -6,5 +6,5 @@ urlpatterns = [
     path('bolim/<int:pk>/mahsulotlar/', BolimItems.as_view()),
     path('mahsulot/<int:pk>/izohlar/', IzohlarAPI.as_view()),
     path('mahsulot/<int:pk>/', MahsulotAPI.as_view()),
-
+    path('mahsulot/search/', MahsulotSearchView.as_view()),
 ]
