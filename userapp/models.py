@@ -11,3 +11,4 @@ class Profil(models.Model):
     shahar = models.CharField(max_length=15)
     def __str__(self):
         return self.ism
+

@@ -7,4 +7,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view()),
     path('login/', LoginAPI.as_view()),
     path('profile/<int:pk>/', BittaProfilAPI.as_view()),
+    path('profiledetail/', ProfileDetailAPIView.as_view()),
 ]
