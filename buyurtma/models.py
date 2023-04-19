@@ -22,7 +22,7 @@ class SavatItem(models.Model):
     def save(self, *args, **kwargs):
         narx = self.mahsulot.narx-(self.mahsulot.narx*self.mahsulot.chegirma/100)
         self.umumiy_summa = (self.miqdor * narx)+self.yetkazish_puli
-        super().self.save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
 class Buyurtma(models.Model):
     profil = models.ForeignKey(Profil, on_delete=models.CASCADE)
@@ -35,5 +35,3 @@ class Buyurtma(models.Model):
         itemlar = self.savat.itemlari.all()
         self.summa = itemlar.aggregate(summasi=Sum('umumiy_summa')).get('summasi')
         super().self.save(*args, **kwargs)
-
-

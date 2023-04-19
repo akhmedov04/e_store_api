@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'main',
     'userapp',
     'buyurtma',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
